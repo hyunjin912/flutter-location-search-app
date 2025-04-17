@@ -1,9 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_loaction_search_app/ui/home/home_list_view.dart';
+import 'package:flutter_loaction_search_app/ui/home/home_view_model.dart';
+import 'package:flutter_loaction_search_app/ui/home/widgets/home_list_view.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends ConsumerStatefulWidget {
+  @override
+  ConsumerState<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends ConsumerState<HomePage> {
+  TextEditingController textController = TextEditingController();
+
+  late final vm = ref.read(homeViewModelProvider.notifier);
+
+  @override
+  void dispose() {
+    textController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
+    HomeState homeState = ref.watch(homeViewModelProvider);
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -13,6 +32,11 @@ class HomePage extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: Colors.pink[50],
           title: TextField(
+            onSubmitted: (value) {
+              vm.search(textController.text);
+            },
+            controller: textController,
+            textInputAction: TextInputAction.done,
             decoration: InputDecoration(
               hintText: '지역 이름을 검색해 주세요',
               border: OutlineInputBorder(
@@ -25,8 +49,10 @@ class HomePage extends StatelessWidget {
         body: Padding(
           padding: EdgeInsets.only(top: 16, left: 16, right: 16),
           child: ListView.separated(
-            itemCount: 10,
-            itemBuilder: (context, index) => HomeListView(),
+            itemCount: homeState.places!.length,
+            itemBuilder: (context, index) {
+              return HomeListView(place: homeState.places![index]);
+            },
             separatorBuilder: (context, index) => SizedBox(height: 20),
           ),
         ),

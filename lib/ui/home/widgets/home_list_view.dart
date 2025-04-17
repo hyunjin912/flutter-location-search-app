@@ -1,6 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_loaction_search_app/data/location_model.dart';
+
+// {
+//   "title": "정왕본동행정복지센터",
+//   "link":
+//       "http://www.siheung.go.kr/city/main.do?method=mainView&siteCmsCd=CM0403",
+//   "category": "공공,사회기관>행정복지센터",
+//   "description": "",
+//   "telephone": "",
+//   "address": "경기도 시흥시 정왕동 2149-3",
+//   "roadAddress": "경기도 시흥시 역전로 228 정왕본동주민센터",
+//   "mapx": "1267460506",
+//   "mapy": "373493011",
+// }
 
 class HomeListView extends StatelessWidget {
+  Location place;
+
+  HomeListView({required this.place});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -16,17 +34,13 @@ class HomeListView extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            '삼성 1동 주민센터',
+            place.title,
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
-          Text('공공,사회기관>행정복지센터', maxLines: 1, overflow: TextOverflow.ellipsis),
-          Text(
-            '서울특별시 강남구 봉은사로 616 삼성1동 주민센터',
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-          ),
+          Text(place.category, maxLines: 1, overflow: TextOverflow.ellipsis),
+          Text(place.roadAddress, maxLines: 1, overflow: TextOverflow.ellipsis),
         ],
       ),
     );
