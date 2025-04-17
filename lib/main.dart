@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_loaction_search_app/ui/home/home_page.dart';
 
-void main() {
+void main() async {
   runApp(const MyApp());
 }
 
