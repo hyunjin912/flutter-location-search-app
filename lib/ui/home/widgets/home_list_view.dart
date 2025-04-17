@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_loaction_search_app/data/location_model.dart';
+import 'package:flutter_loaction_search_app/ui/detail/detail_page.dart';
 
 // {
 //   "title": "정왕본동행정복지센터",
@@ -21,27 +22,43 @@ class HomeListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 18, vertical: 22),
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: Colors.grey[500]!),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            place.title,
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return DetailPage(link: place.link);
+            },
           ),
-          Text(place.category, maxLines: 1, overflow: TextOverflow.ellipsis),
-          Text(place.roadAddress, maxLines: 1, overflow: TextOverflow.ellipsis),
-        ],
+        );
+      },
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 18, vertical: 22),
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(color: Colors.grey[500]!),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              place.title,
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+            Text(place.category, maxLines: 1, overflow: TextOverflow.ellipsis),
+            Text(
+              place.roadAddress,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ],
+        ),
       ),
     );
   }

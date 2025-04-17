@@ -49,9 +49,9 @@ class _HomePageState extends ConsumerState<HomePage> {
         body: Padding(
           padding: EdgeInsets.only(top: 16, left: 16, right: 16),
           child: ListView.separated(
-            itemCount: homeState.places!.length,
+            itemCount: homeState.places.length,
             itemBuilder: (context, index) {
-              return HomeListView(place: homeState.places![index]);
+              return HomeListView(place: homeState.places[index]);
             },
             separatorBuilder: (context, index) => SizedBox(height: 20),
           ),
