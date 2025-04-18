@@ -37,6 +37,7 @@ dependencies:
   flutter_inappwebview: ^6.1.5
   flutter_riverpod: ^2.6.1
   dio: ^5.8.0+1
+  geolocator: ^14.0.0
 
 dev_dependencies:
   flutter_test:
