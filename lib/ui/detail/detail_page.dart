@@ -12,6 +12,7 @@ class DetailPage extends StatefulWidget {
 
 class _DetailPageState extends State<DetailPage> {
   bool isLoaded = false;
+  InAppWebViewController? webViewController;
 
   void onLoaded() {
     setState(() {
@@ -21,27 +22,65 @@ class _DetailPageState extends State<DetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    print('link: ${widget.link}');
-    print(widget.link.contains('http'));
-
     if (widget.link.contains('http')) {
       return Scaffold(
         backgroundColor: Colors.pink[50],
         appBar: AppBar(backgroundColor: Colors.pink[50]),
         body: Stack(
           children: [
-            InAppWebView(
-              initialSettings: InAppWebViewSettings(
-                mediaPlaybackRequiresUserGesture: true,
-                javaScriptEnabled: true,
-                userAgent:
-                    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36',
+            Padding(
+              padding: const EdgeInsets.only(top: 50),
+              child: InAppWebView(
+                initialSettings: InAppWebViewSettings(
+                  mediaPlaybackRequiresUserGesture: true,
+                  javaScriptEnabled: true,
+                  userAgent:
+                      'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36',
+                ),
+                initialUrlRequest: URLRequest(url: WebUri(widget.link)),
+                onLoadStop: (controller, url) {
+                  print('웹페이지 로딩 완료!');
+                  onLoaded();
+                },
+                onWebViewCreated: (controller) {
+                  webViewController = controller;
+                },
               ),
-              initialUrlRequest: URLRequest(url: WebUri(widget.link)),
-              onLoadStop: (controller, url) {
-                print('웹페이지 로딩 완료!');
-                onLoaded();
-              },
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 15),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  GestureDetector(
+                    onTap: () async {
+                      if (await webViewController?.canGoBack() ?? false) {
+                        webViewController?.goBack();
+                      }
+                    },
+                    child: Container(
+                      width: 30,
+                      height: 50,
+                      color: Colors.transparent,
+                      child: Icon(Icons.arrow_back),
+                    ),
+                  ),
+                  SizedBox(width: 20),
+                  GestureDetector(
+                    onTap: () async {
+                      if (await webViewController?.canGoForward() ?? false) {
+                        webViewController?.goForward();
+                      }
+                    },
+                    child: Container(
+                      width: 30,
+                      height: 50,
+                      color: Colors.transparent,
+                      child: Icon(Icons.arrow_forward),
+                    ),
+                  ),
+                ],
+              ),
             ),
             isLoaded
                 ? SizedBox()

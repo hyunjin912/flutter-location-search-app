@@ -32,7 +32,6 @@ class VworldRepository {
           'size': 100,
         },
       );
-
       if (response.statusCode == 200 &&
           response.data['response']['status'] == 'OK') {
         // response > result > featureCollection > features[0] > properties > emd_kor_nm

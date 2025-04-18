@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_loaction_search_app/core/geolocator_helper.dart';
 import 'package:flutter_loaction_search_app/ui/home/home_view_model.dart';
 import 'package:flutter_loaction_search_app/ui/home/widgets/home_list_view.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -47,8 +48,12 @@ class _HomePageState extends ConsumerState<HomePage> {
           ),
           actions: [
             GestureDetector(
-              onTap: () {
-                print('위치 아이콘');
+              onTap: () async {
+                final pos = await GeolocatorHelper.getPosition();
+
+                if (pos != null) {
+                  vm.getLatLng(lat: pos.latitude, lng: pos.longitude);
+                }
               },
               child: Container(
                 width: 50,

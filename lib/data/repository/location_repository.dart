@@ -22,7 +22,6 @@ class LocationRepository {
 
       if (response.statusCode == 200) {
         final items = List.from(response.data['items']);
-        print(items);
         final iterable = items.map((e) => Location.fromJson(e));
         final list = iterable.toList();
 

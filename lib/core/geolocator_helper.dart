@@ -12,7 +12,7 @@ class GeolocatorHelper {
 
       // 2 .권한 요청 후 결과가 거부일 때 리턴하기
       if (rePermission == LocationPermission.denied ||
-          rePermission == LocationPermission.deniedForever) {
+          permission == LocationPermission.deniedForever) {
         return null;
       }
     }
@@ -20,8 +20,8 @@ class GeolocatorHelper {
     // 3. Geolocator로 위치 가져와서 리턴하기
     final position = await Geolocator.getCurrentPosition(
       locationSettings: LocationSettings(
-        accuracy: LocationAccuracy.high,
-        distanceFilter: 100,
+        accuracy: LocationAccuracy.best,
+        distanceFilter: 1000,
       ),
     );
     return position;
