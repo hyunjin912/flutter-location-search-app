@@ -9,18 +9,18 @@ import 'package:dio/dio.dart';
 // size=100
 
 class VworldRepository {
+  final Dio _client = Dio(
+    BaseOptions(
+      // 설정 안 하면, 실패 응답 올 때 throw 던져서 에러 발생
+      validateStatus: (status) => true,
+    ),
+  );
+
   Future<String> findByLatLng({
     required double lat,
     required double lng,
   }) async {
     try {
-      final Dio _client = Dio(
-        BaseOptions(
-          // 설정 안 하면, 실패 응답 올 때 throw 던져서 에러 발생
-          validateStatus: (status) => true,
-        ),
-      );
-
       final response = await _client.get(
         'https://api.vworld.kr/req/data',
         queryParameters: {

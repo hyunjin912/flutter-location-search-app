@@ -2,19 +2,19 @@ import 'package:dio/dio.dart';
 import 'package:flutter_loaction_search_app/data/model/location_model.dart';
 
 class LocationRepository {
+  final Dio _client = Dio(
+    BaseOptions(
+      // 설정 안 하면, 실패 응답 올 때 throw 던져서 에러 발생
+      validateStatus: (status) => true,
+      headers: {
+        'X-Naver-Client-Id': 'NMPhvQCPL0eTHF0tINgB',
+        'X-Naver-Client-Secret': 'HtBLoalFc6',
+      },
+    ),
+  );
+
   Future<List<Location>> search(String query) async {
     try {
-      final Dio _client = Dio(
-        BaseOptions(
-          // 설정 안 하면, 실패 응답 올 때 throw 던져서 에러 발생
-          validateStatus: (status) => true,
-          headers: {
-            'X-Naver-Client-Id': 'NMPhvQCPL0eTHF0tINgB',
-            'X-Naver-Client-Secret': 'HtBLoalFc6',
-          },
-        ),
-      );
-
       final response = await _client.get(
         'https://openapi.naver.com/v1/search/local.json',
         queryParameters: {'query': query, 'display': 5},
