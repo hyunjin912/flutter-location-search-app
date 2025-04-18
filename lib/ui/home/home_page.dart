@@ -45,6 +45,19 @@ class _HomePageState extends ConsumerState<HomePage> {
               ),
             ),
           ),
+          actions: [
+            GestureDetector(
+              onTap: () {
+                print('위치 아이콘');
+              },
+              child: Container(
+                width: 50,
+                height: 50,
+                color: Colors.transparent,
+                child: Icon(Icons.gps_fixed),
+              ),
+            ),
+          ],
         ),
         body: Padding(
           padding: EdgeInsets.only(top: 16, left: 16, right: 16),
