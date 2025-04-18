@@ -1,5 +1,5 @@
-import 'package:flutter_loaction_search_app/data/location_model.dart';
-import 'package:flutter_loaction_search_app/data/location_repository.dart';
+import 'package:flutter_loaction_search_app/data/model/location_model.dart';
+import 'package:flutter_loaction_search_app/data/repository/location_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // 1. 상태 만들기

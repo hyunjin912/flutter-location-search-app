@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_loaction_search_app/data/location_model.dart';
+import 'package:flutter_loaction_search_app/data/model/location_model.dart';
 import 'package:flutter_loaction_search_app/ui/detail/detail_page.dart';
 
 // {
