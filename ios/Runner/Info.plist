@@ -2,6 +2,19 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<!-- geolocator 퍼미션 -->
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>동네 정보를 검색하기 위해 위치 권한을 허용해주세요</string>
+	<!-- // geolocator 퍼미션 -->
+
+	<!-- http 정책 허용 -->
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
+	<!-- // http 정책 허용 -->
+
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
