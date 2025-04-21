@@ -22,6 +22,8 @@ class HomeListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    RegExp regExp = RegExp(r'<[^>]+>');
+
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -46,7 +48,7 @@ class HomeListView extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              place.title,
+              place.title.replaceAll(regExp, ''),
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
